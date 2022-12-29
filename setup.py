@@ -7,7 +7,7 @@
 import setuptools
 
 setuptools.setup(
-    name='rpc_logger',
+    name='rpclogger',
     version='1.0',
     description='report log to remote server',
     author='houjinjing',
