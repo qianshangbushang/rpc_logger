@@ -1,0 +1,5 @@
+# idea dir
+.idea
+
+# config
+*.yaml
