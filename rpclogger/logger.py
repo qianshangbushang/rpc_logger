@@ -2,6 +2,7 @@
 # -*- coding:utf-8 -*-
 # @FileName  :logger.py.py
 # @Time      :2022/12/26 11:43
+import os.path
 import sys
 import traceback
 
@@ -10,7 +11,10 @@ import yaml
 
 
 def load_logger_conf():
-    with open("./framework.yaml", "r") as f:
+    conf_path = "./framework.yaml"
+    if not os.path.exists(conf_path):
+        return []
+    with open(conf_path, "r") as f:
         conf = yaml.safe_load(f)
     return conf.get("logger", [])
 
