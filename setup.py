@@ -25,5 +25,5 @@ setuptools.setup(
         "Operating System :: OS Independent"
     ],
     packages=['rpclogger'],
-    install_requires=["requests", "yaml", "traceback", "loguru"]
+    install_requires=["requests", "yaml", "loguru"]
 )
