@@ -3,13 +3,14 @@
 # @FileName  :logger.py.py
 # @Time      :2022/12/26 11:43
 import sys
+import traceback
 
 import requests
 import yaml
 
 
 def load_logger_conf():
-    with open("framework.yaml", "r") as f:
+    with open("./framework.yaml", "r") as f:
         conf = yaml.safe_load(f)
     return conf.get("logger", [])
 
@@ -79,13 +80,18 @@ def create_rpc_sink(conf: dict):
         }
         addr = conf["target"].split("://")[1]
         proto = conf["proto"]
-        requests.post(
-            url=f"{proto}://{addr}/china_life.proto_repo.rpc_logger.rpc_logger/PushRecord",
-            json=data,
-            headers={
-                'content-type': "application/json"
-            }
-        )
+        try:
+            requests.post(
+                url=f"{proto}://{addr}/china_life.proto_repo.rpc_logger.rpc_logger/PushRecord",
+                json=data,
+                headers={
+                    'content-type': "application/json"
+                },
+                timeout=(1, 1)
+            )
+        except Exception as e:
+            traceback.print_exc()
+            raise Exception("remote server not found")
         return
 
     return rpc_sink
